@@ -1,0 +1,35 @@
+apply plugin: 'java'
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['tests']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.json:json:20160810'
+    compile 'org.attoparser:attoparser:2.0.3.RELEASE'
+    compile 'com.sun.net.httpserver:http:20070405'
+
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes("Implementation-Title": "Twinkle",
+                "Implementation-Version": "1.0.0",
+                "Main-Class": "ru.kipelovets.Twinkle.Main")
+    }
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}

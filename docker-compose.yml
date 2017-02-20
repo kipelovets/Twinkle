@@ -1,0 +1,31 @@
+java:
+  image: java:8
+  working_dir: /app
+  volumes:
+    - ./:/app
+
+server:
+  image: java:8
+  working_dir: /app
+  volumes:
+    - ./:/app
+  command: java -jar build/libs/app.jar serve
+  expose:
+    - 80
+  environment:
+    - VIRTUAL_HOST=twinkle.docker
+    - VIRTUAL_PORT=80
+
+server-test:
+  image: java:8
+  working_dir: /app
+  volumes:
+    - ./:/app
+  links:
+    - server
+
+gradle:
+  build: docker/gradle
+  volumes:
+    - ./:/app
+    - ./.gradle/caches:/root/.gradle/caches
