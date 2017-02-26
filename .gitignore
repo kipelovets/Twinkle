@@ -1,6 +1,5 @@
-.idea
-.gradle
-gradle
-out
-lib
-build
+/.idea
+/.gradle
+/gradle
+/lib
+/build
