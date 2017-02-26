@@ -8,4 +8,4 @@ run:
 	docker-compose run --rm java java -jar build/libs/app.jar "Test story.html"
 
 serve:
-	docker-compose run up -d server
+	docker-compose up -d server

@@ -9,7 +9,7 @@ server:
   working_dir: /app
   volumes:
     - ./:/app
-  command: java -jar build/libs/app.jar serve
+  command: java -jar build/libs/Twinkle.jar serve 80
   expose:
     - 80
   environment:
