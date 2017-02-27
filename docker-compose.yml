@@ -6,6 +6,7 @@ java:
 
 server:
   image: java:8
+  container_name: twinkle
   working_dir: /app
   volumes:
     - ./:/app
