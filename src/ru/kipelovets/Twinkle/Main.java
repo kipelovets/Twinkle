@@ -3,7 +3,6 @@ package ru.kipelovets.Twinkle;
 import com.sun.net.httpserver.HttpServer;
 import org.attoparser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -31,7 +30,7 @@ public class Main {
                     }
 
                     System.out.println((new HarloweProcessor(document)).getNovel().toJSON().toString());
-                } catch (ParseException | FileNotFoundException e) {
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 break;

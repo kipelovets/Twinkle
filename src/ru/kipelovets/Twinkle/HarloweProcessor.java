@@ -8,7 +8,6 @@ import ru.kipelovets.Twinkle.Novel.Novel;
 import ru.kipelovets.Twinkle.Novel.Option;
 import ru.kipelovets.Twinkle.Novel.Stitch;
 
-import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +30,7 @@ public class HarloweProcessor extends AbstractSimpleMarkupHandler {
         novel = new Novel();
     }
 
-    public Novel getNovel() throws ParseException, FileNotFoundException {
+    public Novel getNovel() throws ParseException {
         SimpleMarkupParser parser = new SimpleMarkupParser(ParseConfiguration.htmlConfiguration()); // this is thread-safe and can be reused
 
         parser.parse(document, this);
@@ -46,9 +45,13 @@ public class HarloweProcessor extends AbstractSimpleMarkupHandler {
             text = new StringBuffer();
             currentStitchName = attributes.get("name");
             currentStitchPid = attributes.get("pid");
+
+            System.err.println("OpenElement: passage " + currentStitchName + ", id " + currentStitchPid);
         } else if (elementName.equals("tw-storydata")) {
             firstStitchPid = attributes.get("startnode");
             novel.setName(attributes.get("name"));
+
+            System.err.println("OpenElement: first stitch " + firstStitchPid + ", story name " + novel.getName());
         }
     }
 
@@ -62,6 +65,8 @@ public class HarloweProcessor extends AbstractSimpleMarkupHandler {
     @Override
     public void handleCloseElement(String elementName, int line, int col) throws ParseException {
         if (inElement) {
+            System.err.println("CloseElement: parsing...");
+
             Stitch stitch = new Stitch(expandHtmlEntities(text.toString()));
             stitch.setName(currentStitchName);
 
@@ -80,6 +85,8 @@ public class HarloweProcessor extends AbstractSimpleMarkupHandler {
             }
 
             inElement = false;
+
+            System.err.println("CloseElement: ok");
         }
     }
 

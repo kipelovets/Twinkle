@@ -17,12 +17,13 @@ public class ParserHandler implements HttpHandler {
             return;
         }
 
+        System.err.println(input);
         System.err.println("Parsing document");
         String response;
         try {
             response = (new HarloweProcessor(input)).getNovel().toJSON().toString();
         } catch (Exception e) {
-            System.err.println("Parse error: " + e.getMessage());
+            System.err.println("Parse error: " + e.getClass().getName() + ": " + e.getMessage());
             write(t, 500, "Parse error: " + e.getMessage());
             return;
         }

@@ -5,7 +5,7 @@ gradle-build:
 	docker-compose run --rm gradle build
 
 run:
-	docker-compose run --rm java java -jar build/libs/app.jar "Test story.html"
+	docker-compose run --rm java java -jar build/libs/Twinkle.jar parse "Test story.html"
 
 serve:
 	docker-compose up -d server
